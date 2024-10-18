@@ -1,17 +1,19 @@
 
 services:
 ###> doctrine/doctrine-bundle ###
-  database:
-    image: mysql:${MYSQL_VERSION:-latest}
+  db:
+    image: mariadb:${MARIADB_VERSION:-10.6.18}
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-default_database}
-      MYSQL_USER: ${MYSQL_USER:-default_user}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-default_password}
+      MARIADB_USER: ${MARIADB_USER:-app}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-!ChangeMe!}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-password}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-app}
+    volumes:
+      - database_data:/var/lib/mysql
     ports:
       - "3306:3306"
-    volumes:
-      - ./docker/db/data:/var/lib/mysql
+    ###< doctrine/doctrine-bundle ###
 
   apache:
     image: php:8.2-apache

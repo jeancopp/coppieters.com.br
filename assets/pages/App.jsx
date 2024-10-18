@@ -12,8 +12,7 @@ export default function () {
   return (
     <>
       <div>
-        <Button onClick={handleClick}>
-          Botão foi clicado {count} vez(es)
+        <Button onClick={handleClick}>Botão foi clicado {count} vez(es)
         </Button>
       </div>
     </>
