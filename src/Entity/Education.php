@@ -20,11 +20,15 @@ class Education
     #[ORM\Column(length: 255)]
     private ?string $institution = null;
 
-    #[ORM\Column(type: Types::BLOB)]
+    #[ORM\Column(type: Types::TEXT)]
     private $description;
 
     #[ORM\Column]
     private ?int $year = null;
+
+    #[ORM\ManyToOne(inversedBy: 'Education')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Person $person = null;
 
     public function getId(): ?int
     {
@@ -82,6 +86,18 @@ class Education
     public function setYear(int $year): static
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getPerson(): ?Person
+    {
+        return $this->person;
+    }
+
+    public function setPerson(?Person $person): static
+    {
+        $this->person = $person;
 
         return $this;
     }
