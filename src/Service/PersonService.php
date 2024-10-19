@@ -11,10 +11,11 @@ readonly class PersonService
 {
 
     public function __construct(
-        private PersonRepository $personRepository
+        private PersonRepository $personRepository,
+        private PositionService  $positionService,
     ){}
 
-    public function getDataOf(?string $user): ?CurriculumDto
+    public function getDataOf(?string $user, ?int $positionSize = 10, ?int $positionPage = 1): ?CurriculumDto
     {
         /** @var ?Person $person */
         $person = $this->personRepository->findOneBy([
@@ -30,12 +31,12 @@ readonly class PersonService
             ];
         })?->toArray() ?? [];
 
-
         return (new CurriculumDto())
             ->setName($person?->getName())
             ->setContacts($person?->getContacts())
             ->setTechnologies($person?->getTechnologies())
             ->setSummary($person?->getSummary())
+            ->setPositions($this->positionService->list($person?->getId(), $positionSize, $positionPage))
             ->setEducation($educations);
     }
 

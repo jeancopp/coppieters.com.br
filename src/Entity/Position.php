@@ -128,4 +128,16 @@ class Position
 
         return $this;
     }
+
+    public function getPersonId(): ?int
+    {
+        return $this->person_id;
+    }
+
+    public function setPersonId(?int $person_id): Position
+    {
+        $this->person_id = $person_id;
+        return $this;
+    }
+
 }

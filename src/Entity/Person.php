@@ -38,7 +38,8 @@ class Person
         targetEntity: Position::class,
         mappedBy: 'person',
         cascade: ['persist', 'remove'],
-        orphanRemoval: true
+        fetch: 'LAZY',
+        orphanRemoval: true,
     )]
     private Collection $positions;
 
