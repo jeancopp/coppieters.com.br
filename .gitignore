@@ -28,6 +28,8 @@
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
+migrations/*.php
+docker/db/
 npm-debug.log
 yarn-error.log
 package-lock.json
