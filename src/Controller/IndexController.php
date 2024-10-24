@@ -10,13 +10,14 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
+
 class IndexController extends AbstractController
 {
-    #[Route('/')]
-    public function index(): Response
-    {
-        return $this->render('base.html.twig');
-    }
+
+    public function __construct(
+        private readonly PersonService       $service,
+        private readonly SerializerInterface $serializer,
+    ){}
 
     #[Route(
         path: '/cv/{user}',
@@ -24,17 +25,15 @@ class IndexController extends AbstractController
         methods: ['GET']
     )]
     public function getData(
-        PersonService       $service,
-        SerializerInterface $serializer,
-        string              $user,
+        string                   $user,
         #[MapQueryParameter] int $size,
         #[MapQueryParameter] int $page,
     ): JsonResponse
     {
-        $cv = $service->getDataOf($user, $size, $page);
+        $cv = $this->service->getDataOf($user, $size, $page);
 
         return new JsonResponse(
-            data: $serializer->serialize($cv, 'json'),
+            data: $this->serializer->serialize($cv, 'json'),
             status: Response::HTTP_FOUND,
             json: true,
         );
