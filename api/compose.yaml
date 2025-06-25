@@ -22,7 +22,7 @@ services:
     volumes:
       - ./public:/var/www/html
     depends_on:
-      - database
+      - db
 
 ###< doctrine/doctrine-bundle ###
 

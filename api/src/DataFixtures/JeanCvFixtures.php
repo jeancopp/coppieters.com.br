@@ -308,7 +308,7 @@ class JeanCvFixtures extends Fixture implements DependentFixtureInterface
     }
 
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             CompanyFixtures::class,

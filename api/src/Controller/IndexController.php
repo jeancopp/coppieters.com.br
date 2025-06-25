@@ -26,8 +26,8 @@ class IndexController extends AbstractController
     )]
     public function getData(
         string                   $user,
-        #[MapQueryParameter] int $size,
-        #[MapQueryParameter] int $page,
+        #[MapQueryParameter] int $size=10,
+        #[MapQueryParameter] int $page=1,
     ): JsonResponse
     {
         $cv = $this->service->getDataOf($user, $size, $page);

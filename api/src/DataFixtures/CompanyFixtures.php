@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 class CompanyFixtures extends Fixture
 {
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
 
         foreach ($this->produceCompanies() as $company) {
